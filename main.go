@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/google/go-github/v50/github"
 )
@@ -24,6 +25,10 @@ func main() {
 	flag.StringVar(&repo, "repo", "", "")
 	flag.StringVar(&tag, "tag", "", "")
 	flag.Parse()
+
+	if _, after, found := strings.Cut(tag, ":"); found {
+		tag = after
+	}
 
 	ctx := context.Background()
 	gh := github.NewTokenClient(ctx, token)
