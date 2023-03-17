@@ -1,0 +1,28 @@
+name: TODO
+description: TODO
+inputs:
+  token:
+    description: TODO
+  owner:
+    description: TODO
+  repo:
+    description: TODO
+  tag:
+    description: TODO
+outputs:
+  url:
+    description: TODO
+    value: ${{ steps.action.outputs.url }}
+runs:
+  using: composite
+  steps:
+    - id: action
+      shell: bash
+      run: |-
+        ${{ github.action_path }}/bin/action \
+          -token "${{ inputs.token }}" \
+          -owner "${{ inputs.owner }}" \
+          -repo "${{ inputs.repo }}" \
+          -tag "${{ inputs.tag }}"
+      env:
+        GH_TOKEN: ${{ github.token }}
