@@ -10,6 +10,12 @@ import (
 )
 
 func main() {
+	outp := os.Getenv("GITHUB_OUTPUT")
+	if outp == "" {
+		_, _ = fmt.Fprintf(os.Stderr, "unset: $GITHUB_OUTPUT\n")
+		os.Exit(1)
+	}
+
 	var (
 		token, owner, repo, tag string
 	)
@@ -45,7 +51,18 @@ func main() {
 			tags := vsn.Metadata.Container.Tags
 			for _, t := range tags {
 				if t == tag {
-					fmt.Println(*(vsn.HTMLURL) + "?tag=" + tag)
+					f, err := os.OpenFile(outp, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0644)
+					if err != nil {
+						_, _ = fmt.Fprintf(os.Stderr, "%s\n", err)
+						os.Exit(1)
+					}
+					if _, err := f.WriteString(
+						fmt.Sprintf("url=%s?tag=%s\n", *(vsn.HTMLURL), tag),
+					); err != nil {
+						_, _ = fmt.Fprintf(os.Stderr, "%s\n", err)
+						os.Exit(1)
+					}
+					_ = f.Close()
 					os.Exit(0)
 				}
 			}
