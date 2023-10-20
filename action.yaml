@@ -21,10 +21,11 @@ runs:
         go-version: stable
     - shell: bash
       run: |
-        go run ${GITHUB_ACTION_PATH}/main.go \
+        go run "$ACTION_PATH/main.go" \
           -token "${{ inputs.token }}" \
           -owner "${{ inputs.owner }}" \
           -repo "${{ inputs.repo }}" \
           -tag "${{ inputs.tag }}"
       env:
+        ACTION_PATH: ${{ github.action_path }}
         GH_TOKEN: ${{ github.token }}
