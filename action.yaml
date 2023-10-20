@@ -1,4 +1,4 @@
-name: TODO
+name: lookup-package-url
 description: TODO
 inputs:
   token:
@@ -16,10 +16,12 @@ outputs:
 runs:
   using: composite
   steps:
-    - id: action
-      shell: bash
-      run: |-
-        ${{ github.action_path }}/bin/action \
+    - uses: actions/setup-go@v4
+      with:
+        go-version: stable
+    - shell: bash
+      run: |
+        go run ${{ github.action_path }} \
           -token "${{ inputs.token }}" \
           -owner "${{ inputs.owner }}" \
           -repo "${{ inputs.repo }}" \
