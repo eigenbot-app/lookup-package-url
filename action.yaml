@@ -1,17 +1,17 @@
 name: lookup-package-url
-description: TODO
+description: Provides a container package's web page URL as an output to other actions.
 inputs:
   token:
-    description: TODO
+    description: Token to access the GitHub API with.
   owner:
-    description: TODO
+    description: GitHub organization or user that owns the repository.
   repo:
-    description: TODO
+    description: GitHub repository name.
   tag:
-    description: TODO
+    description: The container package's tag from your Docker build step.
 outputs:
   url:
-    description: TODO
+    description: URL to the container package's web page on GitHub.
     value: ${{ steps.action.outputs.url }}
 runs:
   using: composite
