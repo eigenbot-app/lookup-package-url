@@ -21,14 +21,12 @@ runs:
         go-version: stable
     - shell: bash
       run: |
-        pwd
-        ls -la
-        ls -la $ACTION_PATH
-        go run "$ACTION_PATH/main.go" \
-          -token "${{ inputs.token }}" \
-          -owner "${{ inputs.owner }}" \
-          -repo "${{ inputs.repo }}" \
-          -tag "${{ inputs.tag }}"
+        cd ${{ github.action_path }} && \
+          go run . \
+            -token "${{ inputs.token }}" \
+            -owner "${{ inputs.owner }}" \
+            -repo "${{ inputs.repo }}" \
+            -tag "${{ inputs.tag }}"
       env:
         ACTION_PATH: ${{ github.action_path }}
         GH_TOKEN: ${{ github.token }}
