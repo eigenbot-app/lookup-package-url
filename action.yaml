@@ -21,7 +21,7 @@ runs:
         go-version: stable
     - shell: bash
       run: |
-        go run github.com/eigenbot-app/lookup-package-url@latest \
+        go run ${GITHUB_ACTION_PATH}/main.go \
           -token "${{ inputs.token }}" \
           -owner "${{ inputs.owner }}" \
           -repo "${{ inputs.repo }}" \
