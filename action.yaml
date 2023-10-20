@@ -21,6 +21,9 @@ runs:
         go-version: stable
     - shell: bash
       run: |
+        pwd
+        ls -la
+        ls -la $ACTION_PATH
         go run "$ACTION_PATH/main.go" \
           -token "${{ inputs.token }}" \
           -owner "${{ inputs.owner }}" \
