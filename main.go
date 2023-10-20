@@ -31,7 +31,7 @@ func main() {
 	}
 
 	ctx := context.Background()
-	gh := github.NewTokenClient(ctx, token)
+	gh := github.NewClient(nil).WithAuthToken(token)
 	opts := &github.PackageListOptions{
 		PackageType: github.String("container"),
 		ListOptions: github.ListOptions{
