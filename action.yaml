@@ -28,5 +28,4 @@ runs:
             -repo "${{ inputs.repo }}" \
             -tag "${{ inputs.tag }}"
       env:
-        ACTION_PATH: ${{ github.action_path }}
         GH_TOKEN: ${{ github.token }}
